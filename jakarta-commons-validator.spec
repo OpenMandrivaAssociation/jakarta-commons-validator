@@ -1,23 +1,22 @@
-%define base_name  validator
-%define short_name commons-%{base_name}
-%define name       jakarta-%{short_name}
-%define section    free
+%define base_name   validator
+%define short_name  commons-%{base_name}
+%define name        jakarta-%{short_name}
+%define section     free
 %define build_tests 0
 %define gcj_support 1
 
 Summary:        Jakarta Commons Validator
 Name:           %{name}
-Version:        1.3.0
-Release:        %mkrel 1.2
+Version:        1.3.1
+Release:        %mkrel 1
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
 #Vendor:         JPackage Project
 #Distribution:   JPackage
-Source0:        http://www.apache.org/dist/jakarta/commons/validator/source/commons-validator-%{version}-src.tar.bz2
-Source1:        %{name}.catalog
-# FIXME DTDs are not in the source tarball anymore (conf directory missing)
-Source2:        commons-validator-%{version}-conf.tar.bz2
+Source0:        http://www.apache.org/dist/jakarta/commons/validator/source/commons-validator-%{version}-src.tar.gz
+Source1:        http://www.apache.org/dist/jakarta/commons/validator/source/commons-validator-%{version}-src.tar.gz.asc
+Source2:        %{name}.catalog
 URL:            http://jakarta.apache.org/commons/validator/
 BuildRequires:  jpackage-utils >= 0:1.5
 BuildRequires:  ant >= 0:1.6.2
@@ -65,11 +64,8 @@ Javadoc for %{name}.
 
 %prep
 %setup -q -n %{short_name}-%{version}-src
-# Yay!  No external jars in the source package, way to go...
 
-%{__tar} xjf %{SOURCE2}
-
-cp -p %{SOURCE1} conf/share/catalog
+cp -p %{_sourcedir}/%{name}.catalog conf/share/catalog
 
 # -----------------------------------------------------------------------------
 
