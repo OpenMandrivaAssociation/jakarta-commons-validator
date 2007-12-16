@@ -8,7 +8,7 @@
 Summary:        Jakarta Commons Validator
 Name:           %{name}
 Version:        1.3.1
-Release:        %mkrel 3
+Release:        %mkrel 4
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -18,7 +18,7 @@ Source0:        http://www.apache.org/dist/jakarta/commons/validator/source/comm
 Source1:        http://www.apache.org/dist/jakarta/commons/validator/source/commons-validator-%{version}-src.tar.gz.asc
 Source2:        %{name}.catalog
 URL:            http://jakarta.apache.org/commons/validator/
-BuildRequires:  jpackage-utils >= 0:1.5
+BuildRequires:  java-rpmbuild >= 0:1.5
 BuildRequires:  ant >= 0:1.6.2
 BuildRequires:  jakarta-commons-beanutils >= 0:1.5
 BuildRequires:  jakarta-commons-digester >= 0:1.3
