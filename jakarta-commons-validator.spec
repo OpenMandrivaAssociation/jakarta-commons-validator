@@ -12,6 +12,7 @@ Release:        %mkrel 4
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 #Vendor:         JPackage Project
 #Distribution:   JPackage
 Source0:        http://www.apache.org/dist/jakarta/commons/validator/source/commons-validator-%{version}-src.tar.gz
