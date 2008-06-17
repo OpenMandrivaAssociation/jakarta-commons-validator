@@ -8,7 +8,7 @@
 Summary:        Jakarta Commons Validator
 Name:           %{name}
 Version:        1.3.1
-Release:        %mkrel 4
+Release:        %mkrel 5
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
