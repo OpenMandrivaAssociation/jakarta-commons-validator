@@ -92,26 +92,26 @@ test
 # -----------------------------------------------------------------------------
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 # jars
-mkdir -p $RPM_BUILD_ROOT%{_javadir}
-cp -p dist/%{short_name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-cp -p dist/%{short_name}-%{version}-compress.js $RPM_BUILD_ROOT%{_javadir}/%{name}-compress-%{version}.js
-(cd $RPM_BUILD_ROOT%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|jakarta-||g"`; done)
-(cd $RPM_BUILD_ROOT%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`; done)
+mkdir -p %{buildroot}%{_javadir}
+cp -p dist/%{short_name}-%{version}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
+cp -p dist/%{short_name}-%{version}-compress.js %{buildroot}%{_javadir}/%{name}-compress-%{version}.js
+(cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|jakarta-||g"`; done)
+(cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`; done)
 
 # data
 %{__mkdir_p} %{buildroot}%{_datadir}/%{name}
 (%{__mv} -f %{buildroot}%{_javadir}/*.js %{buildroot}%{_datadir}/%{name})
 
 # dtds and catalog
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/sgml/%{name}
-cp -p conf/share/{*.dtd,catalog} $RPM_BUILD_ROOT%{_datadir}/sgml/%{name}
+mkdir -p %{buildroot}%{_datadir}/sgml/%{name}
+cp -p conf/share/{*.dtd,catalog} %{buildroot}%{_datadir}/sgml/%{name}
 
 # javadoc
-mkdir -p $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr dist/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+mkdir -p %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -pr dist/docs/apidocs/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
@@ -123,7 +123,7 @@ cp -pr dist/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 # -----------------------------------------------------------------------------
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 # -----------------------------------------------------------------------------
 
