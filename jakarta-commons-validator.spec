@@ -8,7 +8,7 @@
 Summary:        Jakarta Commons Validator
 Name:           %{name}
 Version:        1.3.1
-Release:        %mkrel 9
+Release:        %mkrel 11
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -92,26 +92,26 @@ test
 # -----------------------------------------------------------------------------
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 # jars
-mkdir -p %{buildroot}%{_javadir}
-cp -p dist/%{short_name}-%{version}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
-cp -p dist/%{short_name}-%{version}-compress.js %{buildroot}%{_javadir}/%{name}-compress-%{version}.js
-(cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|jakarta-||g"`; done)
-(cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`; done)
+mkdir -p $RPM_BUILD_ROOT%{_javadir}
+cp -p dist/%{short_name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
+cp -p dist/%{short_name}-%{version}-compress.js $RPM_BUILD_ROOT%{_javadir}/%{name}-compress-%{version}.js
+(cd $RPM_BUILD_ROOT%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|jakarta-||g"`; done)
+(cd $RPM_BUILD_ROOT%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`; done)
 
 # data
 %{__mkdir_p} %{buildroot}%{_datadir}/%{name}
 (%{__mv} -f %{buildroot}%{_javadir}/*.js %{buildroot}%{_datadir}/%{name})
 
 # dtds and catalog
-mkdir -p %{buildroot}%{_datadir}/sgml/%{name}
-cp -p conf/share/{*.dtd,catalog} %{buildroot}%{_datadir}/sgml/%{name}
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/sgml/%{name}
+cp -p conf/share/{*.dtd,catalog} $RPM_BUILD_ROOT%{_datadir}/sgml/%{name}
 
 # javadoc
-mkdir -p %{buildroot}%{_javadocdir}/%{name}-%{version}
-cp -pr dist/docs/apidocs/* %{buildroot}%{_javadocdir}/%{name}-%{version}
+mkdir -p $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -pr dist/docs/apidocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
@@ -123,7 +123,7 @@ cp -pr dist/docs/apidocs/* %{buildroot}%{_javadocdir}/%{name}-%{version}
 # -----------------------------------------------------------------------------
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 # -----------------------------------------------------------------------------
 
@@ -165,4 +165,69 @@ fi
 
 # -----------------------------------------------------------------------------
 
+
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.1-9mdv2011.0
++ Revision: 665810
+- mass rebuild
+
+* Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.1-8mdv2011.0
++ Revision: 606064
+- rebuild
+
+* Wed Mar 17 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.1-7mdv2010.1
++ Revision: 523007
+- rebuilt for 2010.1
+
+* Wed Sep 02 2009 Christophe Fergeau <cfergeau@mandriva.com> 0:1.3.1-6mdv2010.0
++ Revision: 425446
+- rebuild
+
+* Tue Jun 17 2008 Thierry Vignaud <tv@mandriva.org> 0:1.3.1-5mdv2009.0
++ Revision: 221649
+- rebuild
+- fix no-buildroot-tag
+- kill re-definition of %%buildroot on Pixel's request
+
+* Sun Dec 16 2007 Anssi Hannula <anssi@mandriva.org> 0:1.3.1-4mdv2008.1
++ Revision: 120919
+- buildrequire java-rpmbuild, i.e. build with icedtea on x86(_64)
+
+* Sat Sep 15 2007 Anssi Hannula <anssi@mandriva.org> 0:1.3.1-3mdv2008.0
++ Revision: 87418
+- rebuild to filter out autorequires of GCJ AOT objects
+- remove unnecessary Requires(post) on java-gcj-compat
+
+* Sat Sep 08 2007 Pascal Terjan <pterjan@mandriva.org> 0:1.3.1-2mdv2008.0
++ Revision: 82605
+- update to new version
+
+* Wed May 16 2007 Herton Ronaldo Krzesinski <herton@mandriva.com.br> 0:1.3.1-1mdv2008.0
++ Revision: 27417
+- Updated to 1.3.1.
+- Updated jakarta-commons-validator.catalog (new dtds).
+
+
+* Thu Mar 15 2007 Christiaan Welvaart <spturtle@mandriva.org> 1.3.0-1.2mdv2007.1
++ Revision: 143932
+- rebuild for 2007.1
+- Import jakarta-commons-validator
+
+* Fri Jun 02 2006 David Walluck <walluck@mandriva.org> 0:1.3-1.1mdv2006.0
+- 1.3
+- rebuild for libgcj.so.7
+
+* Thu Aug 18 2005 David Walluck <walluck@mandriva.org> 0:1.1.4-1.1mdk
+- 1.1.4
+
+* Sun May 22 2005 David Walluck <walluck@mandriva.org> 0:1.1.3-1.1mdk
+- release
+
+* Wed Sep 08 2004 Fernando Nasser <fnasser at redhat.com> - 0:1.1.3-1jpp
+- Upgrade to 1.1.3
+
+* Tue Aug 24 2004 Randy Watler <rwatler at finali.com> - 0:1.0.2-3jpp
+- Rebuild with ant-1.6.2
 
